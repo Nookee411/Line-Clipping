@@ -1,0 +1,6 @@
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ClassesForLineClipping\obj\Debug\ClassesForLineClipping.csprojAssemblyReference.cache
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ClassesForLineClipping\obj\Debug\ClassesForLineClipping.csproj.CoreCompileInputs.cache
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ClassesForLineClipping\bin\Debug\ClassesForLineClipping.dll
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ClassesForLineClipping\bin\Debug\ClassesForLineClipping.pdb
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ClassesForLineClipping\obj\Debug\ClassesForLineClipping.dll
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ClassesForLineClipping\obj\Debug\ClassesForLineClipping.pdb

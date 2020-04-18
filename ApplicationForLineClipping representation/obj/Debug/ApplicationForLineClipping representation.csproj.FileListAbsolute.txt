@@ -1,0 +1,13 @@
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\bin\Debug\ApplicationForLineClipping representation.exe.config
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\bin\Debug\ApplicationForLineClipping representation.exe
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\bin\Debug\ApplicationForLineClipping representation.pdb
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\obj\Debug\ApplicationForLineClipping representation.csprojAssemblyReference.cache
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\obj\Debug\ApplicationForLineClipping_representation.MainForm.resources
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\obj\Debug\ApplicationForLineClipping_representation.Properties.Resources.resources
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\obj\Debug\ApplicationForLineClipping representation.csproj.GenerateResource.cache
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\obj\Debug\ApplicationForLineClipping representation.exe
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\obj\Debug\ApplicationForLineClipping representation.pdb
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\obj\Debug\ApplicationForLineClipping representation.csproj.CoreCompileInputs.cache
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\bin\Debug\ClassesForLineClipping.dll
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\bin\Debug\ClassesForLineClipping.pdb
+C:\Users\danii\OneDrive\Desktop\Учеба\2 курс\2 семестр\Курсач\LineClippingAlgorithms\ApplicationForLineClipping representation\obj\Debug\ApplicationForLineClipping representation.csproj.CopyComplete
