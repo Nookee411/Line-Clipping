@@ -28,33 +28,12 @@ namespace ClassesForLineClipping
         }
 
         /// <summary>
-        /// Define codes of point according to ***?-left, ?***-Up, *?**-down, **?*
+        /// Define codes of point according to Cohen Sutherland algorithm
         /// </summary>
-        /// <param name="Up"></param>
-        /// <param name="Down"></param>
-        /// <param name="Left"></param>
-        /// <param name="Right"></param>
-        public void SetCodes(int Up,int Down,int Left,int Right)
-        {
-            Code = 0;
-            if (X < Left) Code += 1;
-            else if (X > Right) Code += 2;
-            if (Y > Down) Code += 4;
-            else if (Y < Up) Code += 8;
-        }
-
-        /// <summary>
-        /// Simple method of checking is AND operation equals 0
-        /// </summary>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <returns></returns>
-        public static bool IsANDNull(SectionPoint first,SectionPoint second)
-        {
-            
-            return (first.Code & second.Code)==0;
-        }
-
+        /// <param name="Up">Upper border</param>
+        /// <param name="Down">Bottom border</param>
+        /// <param name="Left">Left border</param>
+        /// <param name="Right">Right border</param>
         public static int GetCode(int x,int y, int Up, int Down, int Left, int Right)
         {
             int code = 0;

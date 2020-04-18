@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,36 +28,28 @@ namespace ClassesForLineClipping
             int xLeft = restrictiveRect.X; //Left border
             int xRight = restrictiveRect.X + restrictiveRect.Width; //Right border
 
-            a.SetCodes(yUp, yDown, xLeft, xRight);
-            b.SetCodes(yUp, yDown, xLeft, xRight);
             //First thing first we must define codes of section endings.
-            int codeStart = a.Code;
-            int codeEnd = b.Code;
+            int codeStart = SectionPoint.GetCode(a.X, a.Y, yUp, yDown, xLeft, xRight);
+            int codeEnd = SectionPoint.GetCode(b.X,b.Y, yUp, yDown, xLeft, xRight);
 
-            double xStart = a.X, yStart = a.Y, xEnd = b.X, yEnd = b.Y;
+            float xStart = a.X, yStart = a.Y, xEnd = b.X, yEnd = b.Y;
 
-            double dx,dy,dydx,dxdy;
+            //dx, dy - difference between coordinated of start and end of segments
+            float dx,dy,dydx =0,dxdy=0; 
            
-            //Graph.DrawLine(line, a.X, a.Y, b.X, b.Y);
-
+            //Finding dx and dy
             dx = xEnd-xStart;
             dy = yEnd-yStart;
-            dydx = dy / dx;
-            dxdy = dx / dy;
-            if (dx != 0)
+            if (dx != 0) //If x difference is not euqal 0 then find dydx
                 dydx = dy / dx;
-            else if (dy == 0)
-                {
+            else if (dy == 0) //If dx equal zero and dy equal zero, it means segment has zero length, we shouldn't draw it
                     return;
-                }
-
             if (dy != 0) 
-                dxdy = dx / dy;
-
-            bool isVisible = false;
-            int i = 5;
-            do
+                dxdy = dx / dy;//If y difference is not euqal 0 then find dxdy
+            bool isVisible = false; //Setting flag to zero
+            for(int i=0;i<5;i++) //Main clipping algorithm
             {
+                
                 if ((codeStart & codeEnd) != 0) break; //Means its out of window
                 if (codeStart == 0 && codeEnd == 0) //Means if inside window
                 {
@@ -66,55 +59,60 @@ namespace ClassesForLineClipping
                 if (codeStart == 0) //starting point inside of window
                 {
                     //We need it outside, so we swaps with ending point
-                    codeStart += codeEnd;
-                    codeEnd = codeStart - codeEnd;
-                    codeStart = codeStart- codeEnd;
-
-                    xStart += xEnd;
-                    xEnd = xStart - xEnd;
-                    xStart = xStart - xEnd;
-
-                    yStart += yEnd;
-                    yEnd = yStart - yEnd;
-                    yStart = yStart - yEnd;
+                    Swap(ref codeStart, ref codeEnd);
+                    Swap(ref xStart, ref xEnd);
+                    Swap(ref yStart, ref yEnd);
                 }
                 if ((codeStart & 1) != 0)//Crosses left border
                 {
-                    double tempY = yStart + dydx * (xLeft - xStart);
-                    Graph.DrawLine(inVisibleLine, (float)xStart, (float)yStart, (float)xLeft, (float)tempY);
+                    float tempY = (float)(yStart + dydx * (xLeft - xStart)); //saving y position at crossing with side of border
+                    Graph.DrawLine(inVisibleLine, xStart, yStart, xLeft, tempY); //Draw "invisible" line just for representation purposes
                     yStart = tempY;
                     xStart = xLeft;
                 }
                 else if ((codeStart & 2) != 0) //Crosses right border
                 {
-                    double tempY = yStart + dydx * (xRight - xStart);
-                    Graph.DrawLine(inVisibleLine, (float)xStart, (float)yStart, (float)xRight, (float)tempY);
+                    float tempY = (float)(yStart + dydx * (xRight - xStart));
+                    Graph.DrawLine(inVisibleLine, xStart, yStart, xRight, tempY);
                     yStart = tempY;
                     xStart = xRight;
                 }
                 else if ((codeStart & 4) != 0) //Crosses bottom border
                 {
-                    double tempX = xStart + dxdy * (yDown - yStart);
-                    Graph.DrawLine(inVisibleLine, (float)xStart, (float)yStart, (float)tempX, (float)yDown);
+                    float tempX = (float)(xStart + dxdy * (yDown - yStart));
+                    Graph.DrawLine(inVisibleLine, xStart, yStart, tempX, yDown);
                     xStart = tempX;
                     yStart = yDown;
                 }
                 else if ((codeStart & 8) != 0) //Crosses upper border
                 {
-                    double tempX = xStart + dxdy * (yUp - yStart);
-                    Graph.DrawLine(inVisibleLine, (float)xStart, (float)yStart, (float)tempX, (float)yUp);
+                    float tempX = (float)(xStart + dxdy * (yUp - yStart));
+                    Graph.DrawLine(inVisibleLine, xStart, yStart, tempX, yUp);
                     xStart = tempX;
                     yStart = yUp;
                 }
                 
                 codeStart = SectionPoint.GetCode((int)xStart, (int)yStart, yUp, yDown, xLeft, xRight);
-            } while (--i != 0);
+            }
             if(isVisible)
             {
-                Graph.DrawLine(visibleLine, (int)xStart, (int)yStart, (int)xEnd, (int)yEnd);
+                Graph.DrawLine(visibleLine, xStart, yStart, xEnd, yEnd);
             }
             else
-                Graph.DrawLine(inVisibleLine, (int)xStart, (int)yStart, (int)xEnd, (int)yEnd);
+                Graph.DrawLine(inVisibleLine, xStart, yStart, xEnd, yEnd);
+        }
+        // Auxiliary algorithms
+        private static void Swap(ref int a,ref int b)
+        {
+            a += b;
+            b = a - b;
+            a = a - b;
+        }
+        private static void Swap(ref float a, ref float b)
+        {
+            a += b;
+            b = a - b;
+            a = a - b;
         }
     }
 }

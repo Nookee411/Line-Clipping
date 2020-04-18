@@ -48,39 +48,31 @@ namespace ApplicationForLineClipping_representation
         private void pictureBoxField_MouseUp(object sender, MouseEventArgs e)
         {
 
-            switch(activeTool)
+            switch (activeTool)
             {
                 case tools.border:
-                {
-                        Point endPoint;
-                        if (startPoint.X > e.X || startPoint.Y > e.Y)
-                        {
-                            endPoint = startPoint;
-                            startPoint = new Point(e.X, e.Y);
-                        }
-                        else
-                        {
-                            endPoint = new Point(e.X, e.Y);
-                        }
-                        border = Rectangle.FromLTRB(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
-                            Graph.DrawRectangle(bord, border);
-                    break;
-                }
+                    {
+
+                        border = Rectangle.FromLTRB(Math.Min(startPoint.X, e.X), Math.Min(startPoint.Y, e.Y), Math.Max(startPoint.X, e.X), Math.Max(startPoint.Y, e.Y));
+                        Graph.DrawRectangle(bord, border);
+                        break;
+                    }
 
                 case tools.Sutherland:
                     {
-                        if(border!=null)
+                        if (border != null)
                         {
-                            SectionPoint a = new SectionPoint(startPoint.X,startPoint.Y);
+                            SectionPoint a = new SectionPoint(startPoint.X, startPoint.Y);
                             SectionPoint b = new SectionPoint(e.X, e.Y);
-                            Graph.DrawSection1(border,visible,inVisible, a, b);
+                            Graph.DrawSection1(border, visible, inVisible, a, b);
                         }
                         break;
                     }
 
+               
             }
 
-            
+
         }
 
         private void pictureBoxField_MouseDown(object sender, MouseEventArgs e)

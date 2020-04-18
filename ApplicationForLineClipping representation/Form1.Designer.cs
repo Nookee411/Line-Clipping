@@ -60,7 +60,9 @@
             // 
             // toolStrip
             // 
+            this.toolStrip.BackColor = System.Drawing.Color.Silver;
             this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonRestrictiveBorder,
             this.toolStripButtonSutherland});
@@ -93,6 +95,8 @@
             // 
             // pictureBoxField
             // 
+            this.pictureBoxField.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBoxField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxField.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxField.Location = new System.Drawing.Point(0, 49);
             this.pictureBoxField.Name = "pictureBoxField";
