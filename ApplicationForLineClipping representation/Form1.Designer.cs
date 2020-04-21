@@ -35,6 +35,8 @@
             this.toolStripButtonRestrictiveBorder = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSutherland = new System.Windows.Forms.ToolStripButton();
             this.pictureBoxField = new System.Windows.Forms.PictureBox();
+            this.toolStripButtonClippingWindow = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonBeckAlgorithm = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxField)).BeginInit();
@@ -65,13 +67,16 @@
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonRestrictiveBorder,
-            this.toolStripButtonSutherland});
+            this.toolStripButtonSutherland,
+            this.toolStripButtonClippingWindow,
+            this.toolStripButtonBeckAlgorithm});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStrip.Size = new System.Drawing.Size(800, 25);
+            this.toolStrip.Size = new System.Drawing.Size(800, 39);
             this.toolStrip.TabIndex = 1;
             this.toolStrip.Text = "Tools";
+            this.toolStrip.Resize += new System.EventHandler(this.toolStrip_Resize);
             // 
             // toolStripButtonRestrictiveBorder
             // 
@@ -79,7 +84,7 @@
             this.toolStripButtonRestrictiveBorder.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRestrictiveBorder.Image")));
             this.toolStripButtonRestrictiveBorder.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRestrictiveBorder.Name = "toolStripButtonRestrictiveBorder";
-            this.toolStripButtonRestrictiveBorder.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonRestrictiveBorder.Size = new System.Drawing.Size(36, 36);
             this.toolStripButtonRestrictiveBorder.Text = "Restictive Border";
             this.toolStripButtonRestrictiveBorder.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -89,7 +94,7 @@
             this.toolStripButtonSutherland.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSutherland.Image")));
             this.toolStripButtonSutherland.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonSutherland.Name = "toolStripButtonSutherland";
-            this.toolStripButtonSutherland.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonSutherland.Size = new System.Drawing.Size(36, 36);
             this.toolStripButtonSutherland.Text = "Sutherland";
             this.toolStripButtonSutherland.Click += new System.EventHandler(this.toolStripButtonSutherland_Click);
             // 
@@ -98,14 +103,34 @@
             this.pictureBoxField.BackColor = System.Drawing.Color.LightGray;
             this.pictureBoxField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBoxField.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxField.Location = new System.Drawing.Point(0, 49);
+            this.pictureBoxField.Location = new System.Drawing.Point(0, 63);
             this.pictureBoxField.Name = "pictureBoxField";
-            this.pictureBoxField.Size = new System.Drawing.Size(800, 401);
+            this.pictureBoxField.Size = new System.Drawing.Size(800, 387);
             this.pictureBoxField.TabIndex = 2;
             this.pictureBoxField.TabStop = false;
             this.pictureBoxField.Click += new System.EventHandler(this.pictureBoxField_Click);
             this.pictureBoxField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxField_MouseDown);
             this.pictureBoxField.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxField_MouseUp);
+            // 
+            // toolStripButtonClippingWindow
+            // 
+            this.toolStripButtonClippingWindow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonClippingWindow.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonClippingWindow.Image")));
+            this.toolStripButtonClippingWindow.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonClippingWindow.Name = "toolStripButtonClippingWindow";
+            this.toolStripButtonClippingWindow.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButtonClippingWindow.Text = "Clipping Window";
+            this.toolStripButtonClippingWindow.Click += new System.EventHandler(this.toolStripButtonClippingWindow_Click);
+            // 
+            // toolStripButtonBeckAlgorithm
+            // 
+            this.toolStripButtonBeckAlgorithm.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonBeckAlgorithm.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonBeckAlgorithm.Image")));
+            this.toolStripButtonBeckAlgorithm.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonBeckAlgorithm.Name = "toolStripButtonBeckAlgorithm";
+            this.toolStripButtonBeckAlgorithm.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButtonBeckAlgorithm.Text = "toolStripButton1";
+            this.toolStripButtonBeckAlgorithm.Click += new System.EventHandler(this.toolStripButtonBeckAlgorithm_Click_1);
             // 
             // MainForm
             // 
@@ -138,6 +163,8 @@
         private System.Windows.Forms.PictureBox pictureBoxField;
         private System.Windows.Forms.ToolStripButton toolStripButtonRestrictiveBorder;
         private System.Windows.Forms.ToolStripButton toolStripButtonSutherland;
+        private System.Windows.Forms.ToolStripButton toolStripButtonClippingWindow;
+        private System.Windows.Forms.ToolStripButton toolStripButtonBeckAlgorithm;
     }
 }
 
