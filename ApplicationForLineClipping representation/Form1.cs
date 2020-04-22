@@ -9,6 +9,9 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using System.IO;
+using System.Diagnostics;
 
 namespace ApplicationForLineClipping_representation
 {
@@ -17,6 +20,9 @@ namespace ApplicationForLineClipping_representation
         Pen visible;
         Pen inVisible;
         Pen bord;
+
+        const string testTimeFile = "..\\..\\..\\test_time.txt";
+        const string testTimeFileBeck = "..\\..\\..\\test_time_beck.txt";
 
         private enum tools : byte { border, Sutherland, clippingWindow, beck };
         tools activeTool = new tools();
@@ -143,6 +149,7 @@ namespace ApplicationForLineClipping_representation
             toolStripButtonRestrictiveBorder.Checked = false;
             toolStripButtonBeckAlgorithm.Checked = false;
             toolStripButtonClippingWindow.Checked = false;
+            toolStripButtonTestSutherland.Checked = false;
         }
 
         private void ResetTool()
@@ -155,6 +162,95 @@ namespace ApplicationForLineClipping_representation
         private void toolStrip_Resize(object sender, EventArgs e)
         {
             Graph = pictureBoxField.CreateGraphics();
+        }
+
+        private void toolStripButtonTestSutherland_Click(object sender, EventArgs e)
+        {
+            UncheckAllItems();
+            toolStripButtonTestSutherland.Checked = true;
+            testSutherland();
+        }
+
+        private void testSutherland()
+        {
+            const int SIZE = 150;
+            const int ITERATIONS = 1000;
+            Point center = new Point(pictureBoxField.Width / 2, pictureBoxField.Height / 2);
+            Rectangle clippingwindow = new Rectangle(center.X - SIZE / 2, center.Y - SIZE / 2, SIZE, SIZE);
+            Graph.DrawRectangle(bord, clippingwindow);
+            SectionPoint A;
+            SectionPoint B;
+            var sw = new Stopwatch();
+            Task.Run(() =>
+            {
+                for (int k = 1; k <= 10; k++)
+                {
+                    StreamWriter output = new StreamWriter(testTimeFile, true);
+                    long totalTime = 0;
+                    for (int j = 0; j < 10; j++)
+                    {
+
+                        Graph.Clear(pictureBoxField.BackColor);
+                        sw.Start();
+                        for (double i = 0; i < Math.PI; i += Math.PI * 2 / (ITERATIONS * k))
+                        {
+                            A = new SectionPoint((int)(center.X + SIZE * Math.Cos(i)), (int)(center.Y + SIZE * Math.Sin(i)));
+                            B = new SectionPoint((int)(center.X + SIZE * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE * Math.Sin(i + Math.PI)));
+                            Graph.DrawSection1(clippingwindow, visible, inVisible, A, B);
+                        }
+                        sw.Stop();
+                        totalTime += sw.ElapsedMilliseconds;
+                        sw.Reset();
+                    }
+                    output.WriteLine($"{ITERATIONS*k}\t{totalTime/10}");
+                    output.Close();
+
+                }
+            });
+        }
+
+        private void toolStripButtonTextBeck_Click(object sender, EventArgs e)
+        {
+
+            const int SIZE = 150;
+            const int ITERATIONS = 1000;
+            Point center = new Point(pictureBoxField.Width / 2, pictureBoxField.Height / 2);
+            List<PointF> clippingwindow = new List<PointF>();
+            clippingwindow.Add(new PointF(center.X - SIZE / 2, center.Y - SIZE / 2));
+            clippingwindow.Add(new PointF(center.X - SIZE / 2, center.Y + SIZE / 2));
+            clippingwindow.Add(new PointF(center.X + SIZE / 2, center.Y + SIZE / 2));
+            clippingwindow.Add(new PointF(center.X + SIZE / 2, center.Y - SIZE / 2));
+            Graph.DrawPolygon(Pens.Blue, clippingwindow.ToArray());
+            Point A;
+            Point B;
+            var sw = new Stopwatch();
+            var normales = Graph.DefineNormales(clippingwindow);
+            Task.Run(() =>
+            {
+                for (int k = 1; k <= 10; k++)
+                {
+                    StreamWriter output = new StreamWriter(testTimeFileBeck, true);
+                    long totalTime = 0;
+                    for (int j = 0; j < 10; j++)
+                    {
+
+                        Graph.Clear(pictureBoxField.BackColor);
+                        sw.Start();
+                        for (double i = 0; i < Math.PI; i += Math.PI * 2 / (ITERATIONS * k))
+                        {
+                            A = new Point((int)(center.X + SIZE * Math.Cos(i)), (int)(center.Y + SIZE * Math.Sin(i)));
+                            B = new Point((int)(center.X + SIZE * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE * Math.Sin(i + Math.PI)));
+                            Graph.DrawBeckWithoutNormalesDefinition(clippingwindow,normales, visible, inVisible, A, B);
+                        }
+                        sw.Stop();
+                        totalTime += sw.ElapsedMilliseconds;
+                        sw.Reset();
+                    }
+                    output.WriteLine($"{ITERATIONS * k}\t{totalTime / 10}");
+                    output.Close();
+
+                }
+            });
         }
     }
 }

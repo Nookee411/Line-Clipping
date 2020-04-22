@@ -37,6 +37,8 @@
             this.pictureBoxField = new System.Windows.Forms.PictureBox();
             this.toolStripButtonClippingWindow = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBeckAlgorithm = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonTestSutherland = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonTextBeck = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxField)).BeginInit();
@@ -69,7 +71,9 @@
             this.toolStripButtonRestrictiveBorder,
             this.toolStripButtonSutherland,
             this.toolStripButtonClippingWindow,
-            this.toolStripButtonBeckAlgorithm});
+            this.toolStripButtonBeckAlgorithm,
+            this.toolStripButtonTestSutherland,
+            this.toolStripButtonTextBeck});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -132,6 +136,26 @@
             this.toolStripButtonBeckAlgorithm.Text = "toolStripButton1";
             this.toolStripButtonBeckAlgorithm.Click += new System.EventHandler(this.toolStripButtonBeckAlgorithm_Click_1);
             // 
+            // toolStripButtonTestSutherland
+            // 
+            this.toolStripButtonTestSutherland.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonTestSutherland.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonTestSutherland.Image")));
+            this.toolStripButtonTestSutherland.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonTestSutherland.Name = "toolStripButtonTestSutherland";
+            this.toolStripButtonTestSutherland.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButtonTestSutherland.Text = "toolStripButton1";
+            this.toolStripButtonTestSutherland.Click += new System.EventHandler(this.toolStripButtonTestSutherland_Click);
+            // 
+            // toolStripButtonTextBeck
+            // 
+            this.toolStripButtonTextBeck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonTextBeck.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonTextBeck.Image")));
+            this.toolStripButtonTextBeck.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonTextBeck.Name = "toolStripButtonTextBeck";
+            this.toolStripButtonTextBeck.Size = new System.Drawing.Size(36, 36);
+            this.toolStripButtonTextBeck.Text = "toolStripButton1";
+            this.toolStripButtonTextBeck.Click += new System.EventHandler(this.toolStripButtonTextBeck_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,6 +189,8 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonSutherland;
         private System.Windows.Forms.ToolStripButton toolStripButtonClippingWindow;
         private System.Windows.Forms.ToolStripButton toolStripButtonBeckAlgorithm;
+        private System.Windows.Forms.ToolStripButton toolStripButtonTestSutherland;
+        private System.Windows.Forms.ToolStripButton toolStripButtonTextBeck;
     }
 }
 
