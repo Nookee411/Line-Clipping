@@ -139,7 +139,7 @@
             this.toolStripButtonTextBeck.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonTextBeck.Name = "toolStripButtonTextBeck";
             this.toolStripButtonTextBeck.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButtonTextBeck.Text = "toolStripButton1";
+            this.toolStripButtonTextBeck.Text = "Test Cyrus Beck";
             this.toolStripButtonTextBeck.Click += new System.EventHandler(this.toolStripButtonTextBeck_Click);
             // 
             // pictureBoxField
