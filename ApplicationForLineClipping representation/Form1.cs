@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using System.IO;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace ApplicationForLineClipping_representation
 {
@@ -173,18 +174,17 @@ namespace ApplicationForLineClipping_representation
 
         private void testSutherland()
         {
-            const int SIZE = 150;
-            const int ITERATIONS = 1000;
+            const int SIZE = 100;
+            const int ITERATIONS = 5000;
             Point center = new Point(pictureBoxField.Width / 2, pictureBoxField.Height / 2);
-            Rectangle clippingwindow = new Rectangle(center.X - SIZE / 2, center.Y - SIZE / 2, SIZE, SIZE);
+            Rectangle clippingwindow = new Rectangle(center.X - pictureBoxField.Width/4, center.Y -pictureBoxField.Height/4, pictureBoxField.Width / 2, pictureBoxField.Height / 2);
             Graph.DrawRectangle(bord, clippingwindow);
             SectionPoint A;
             SectionPoint B;
+            Random rand = new Random();
             var sw = new Stopwatch();
             Task.Run(() =>
             {
-                for (int k = 1; k <= 10; k++)
-                {
                     StreamWriter output = new StreamWriter(testTimeFile, true);
                     long totalTime = 0;
                     for (int j = 0; j < 10; j++)
@@ -192,65 +192,75 @@ namespace ApplicationForLineClipping_representation
 
                         Graph.Clear(pictureBoxField.BackColor);
                         sw.Start();
-                        for (double i = 0; i < Math.PI; i += Math.PI * 2 / (ITERATIONS * k))
+                        for (int i=0;i<ITERATIONS;i++)
                         {
-                            A = new SectionPoint((int)(center.X + SIZE * Math.Cos(i)), (int)(center.Y + SIZE * Math.Sin(i)));
-                            B = new SectionPoint((int)(center.X + SIZE * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE * Math.Sin(i + Math.PI)));
-                            Graph.DrawSection1(clippingwindow, visible, inVisible, A, B);
+                        //A = new SectionPoint((int)(center.X+300 + SIZE/3 * Math.Cos(i)), (int)(center.Y + SIZE/3 * Math.Sin(i)));
+                        //B = new SectionPoint((int)(center.X+300 + SIZE/3 * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE/3 * Math.Sin(i + Math.PI)));
+                        //A = new SectionPoint(center.X+rand.Next() % 20, center.Y - 200- rand.Next() % 50);
+                        //B = new SectionPoint(center.X- rand.Next() % 20, center.Y + 200+ rand.Next() % 50);
+                        A = new SectionPoint(rand.Next() % pictureBoxField.Width, rand.Next() % pictureBoxField.Height);
+                        B = new SectionPoint(rand.Next() % pictureBoxField.Width, rand.Next()%pictureBoxField.Height);
+                        Graph.DrawSection1(clippingwindow, visible, inVisible, A, B);
                         }
                         sw.Stop();
                         totalTime += sw.ElapsedMilliseconds;
                         sw.Reset();
                     }
-                    output.WriteLine($"{ITERATIONS*k}\t{totalTime/10}");
+                    output.WriteLine($"{ITERATIONS}\t{totalTime/10}");
                     output.Close();
-
-                }
             });
         }
 
         private void toolStripButtonTextBeck_Click(object sender, EventArgs e)
         {
 
-            const int SIZE = 150;
-            const int ITERATIONS = 1000;
+            const int SIZE = 300;
+            const int ITERATIONS = 5000;
             Point center = new Point(pictureBoxField.Width / 2, pictureBoxField.Height / 2);
             List<PointF> clippingwindow = new List<PointF>();
-            clippingwindow.Add(new PointF(center.X - SIZE / 2, center.Y - SIZE / 2));
-            clippingwindow.Add(new PointF(center.X - SIZE / 2, center.Y + SIZE / 2));
-            clippingwindow.Add(new PointF(center.X + SIZE / 2, center.Y + SIZE / 2));
-            clippingwindow.Add(new PointF(center.X + SIZE / 2, center.Y - SIZE / 2));
-            Graph.DrawPolygon(Pens.Blue, clippingwindow.ToArray());
-            Point A;
-            Point B;
+            clippingwindow.Add(new PointF(center.X - pictureBoxField.Width / 4, center.Y - pictureBoxField.Height / 4));
+            clippingwindow.Add(new PointF(center.X - pictureBoxField.Width / 4, center.Y + pictureBoxField.Height / 4));
+            clippingwindow.Add(new PointF(center.X + pictureBoxField.Width / 4, center.Y + pictureBoxField.Height / 4));
+            clippingwindow.Add(new PointF(center.X + pictureBoxField.Width / 4, center.Y - pictureBoxField.Height / 4));
+            //clippingwindow.Add(new PointF(center.X - SIZE / 2, center.Y - SIZE / 2));
+            //clippingwindow.Add(new PointF(center.X - 40 - SIZE / 2, center.Y));
+            //clippingwindow.Add(new PointF(center.X - SIZE / 2, center.Y + SIZE / 2));
+            //clippingwindow.Add(new PointF(center.X + SIZE / 2, center.Y + SIZE / 2));
+            //clippingwindow.Add(new PointF(center.X + 40 + SIZE / 2, center.Y));
+            //clippingwindow.Add(new PointF(center.X + SIZE / 2, center.Y - SIZE / 2));
+            //clippingwindow.Add(new PointF(center.X, center.Y - 40 - SIZE / 2));
+
+            int[] sides = {3,4,5,7,8,9,10,12};
+            Random rand = new Random();
+            PointF A;
+            PointF B;
             var sw = new Stopwatch();
-            var normales = Graph.DefineNormales(clippingwindow);
-            Task.Run(() =>
-            {
-                for (int k = 1; k <= 10; k++)
-                {
+                //for (double j = 0; j < Math.PI * 2; j += Math.PI * 2 /sides[k])
+                //    clippingwindow.Add(new PointF((float)(center.X + SIZE/2 * Math.Cos(j)), (float)(center.Y + SIZE/2 * Math.Sin(j))));
+                var normales = Graph.DefineNormales(clippingwindow);
+                //Graph.DrawPolygon(Pens.Black, clippingwindow.ToArray());
                     StreamWriter output = new StreamWriter(testTimeFileBeck, true);
                     long totalTime = 0;
-                    for (int j = 0; j < 10; j++)
-                    {
+            for (int j = 0; j < 10; j++)
+            {         
 
-                        Graph.Clear(pictureBoxField.BackColor);
-                        sw.Start();
-                        for (double i = 0; i < Math.PI; i += Math.PI * 2 / (ITERATIONS * k))
-                        {
-                            A = new Point((int)(center.X + SIZE * Math.Cos(i)), (int)(center.Y + SIZE * Math.Sin(i)));
-                            B = new Point((int)(center.X + SIZE * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE * Math.Sin(i + Math.PI)));
-                            Graph.DrawBeckWithoutNormalesDefinition(clippingwindow,normales, visible, inVisible, A, B);
-                        }
-                        sw.Stop();
-                        totalTime += sw.ElapsedMilliseconds;
-                        sw.Reset();
-                    }
-                    output.WriteLine($"{ITERATIONS * k}\t{totalTime / 10}");
-                    output.Close();
+                Graph.Clear(pictureBoxField.BackColor);
+                sw.Start();
+                for (double i = 0; i < Math.PI; i += Math.PI * 2 / ITERATIONS)
+                {
+                    A = new PointF(rand.Next() % pictureBoxField.Width, rand.Next() % pictureBoxField.Height);
+                    B = new PointF(rand.Next() % pictureBoxField.Width, rand.Next() % pictureBoxField.Height);
+                    //A = new Point((int)(center.X + SIZE * Math.Cos(i)), (int)(center.Y + SIZE * Math.Sin(i)));
+                    //B = new Point((int)(center.X + SIZE * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE * Math.Sin(i + Math.PI)));
+                    Graph.DrawBeckWithoutNormalesDefinition(clippingwindow, normales, visible, inVisible, A, B);
 
                 }
-            });
+                sw.Stop();
+                totalTime += sw.ElapsedMilliseconds;
+                sw.Reset();
+            }
+                    output.WriteLine($"{clippingwindow.Count}\t{ITERATIONS}\t{totalTime / 10}");
+                    output.Close();
         }
     }
 }
