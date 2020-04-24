@@ -1,0 +1,10 @@
+Beck test starts
+Iterations  Time
+1000	3651
+Beck test starts
+Iterations  Time
+1000	7070
+Beck test starts
+Parly visible
+Iterations  Time
+1000	2284

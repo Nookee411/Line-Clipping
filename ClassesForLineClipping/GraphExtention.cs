@@ -20,7 +20,7 @@ namespace ClassesForLineClipping
         /// <param name="clippingWindow">Sets clipping window(отсекающее окно)</param>
         /// <param name="a">First point of section</param>
         /// <param name="b">Second point of section</param>
-        public static void DrawSection1(this Graphics Graph,Rectangle clippingWindow, Pen visibleLine, Pen inVisibleLine, SectionPoint a,SectionPoint b)
+        public static void DrawSutherland(this Graphics Graph,Rectangle clippingWindow, Pen visibleLine, Pen inVisibleLine, SectionPoint a,SectionPoint b)
         {
 
             //Defining borders just for the sake of usability

@@ -31,14 +31,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.очиститьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.тестыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.тестСазерлендаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.partlyVisibleLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.roundPartlyVisibleLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fullyInvisibleLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fullyVisibleLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beckTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonRestrictiveBorder = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonSutherland = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonClippingWindow = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonBeckAlgorithm = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonTestSutherland = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonTextBeck = new System.Windows.Forms.ToolStripButton();
             this.pictureBoxField = new System.Windows.Forms.PictureBox();
+            this.randomPartlyVisibleLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.roundPartlyVisibleLinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fullyVisibleLinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.fullyInvisibleLinesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxField)).BeginInit();
@@ -48,7 +57,8 @@
             // 
             this.menuStrip.BackColor = System.Drawing.Color.WhiteSmoke;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.очиститьToolStripMenuItem});
+            this.очиститьToolStripMenuItem,
+            this.тестыToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(984, 24);
@@ -58,9 +68,68 @@
             // очиститьToolStripMenuItem
             // 
             this.очиститьToolStripMenuItem.Name = "очиститьToolStripMenuItem";
-            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.очиститьToolStripMenuItem.Text = "Очистить";
+            this.очиститьToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.очиститьToolStripMenuItem.Text = "Clear";
             this.очиститьToolStripMenuItem.Click += new System.EventHandler(this.очиститьToolStripMenuItem_Click);
+            // 
+            // тестыToolStripMenuItem
+            // 
+            this.тестыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.тестСазерлендаToolStripMenuItem,
+            this.beckTestToolStripMenuItem});
+            this.тестыToolStripMenuItem.Name = "тестыToolStripMenuItem";
+            this.тестыToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.тестыToolStripMenuItem.Text = "Tests";
+            // 
+            // тестСазерлендаToolStripMenuItem
+            // 
+            this.тестСазерлендаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.partlyVisibleLinesToolStripMenuItem,
+            this.roundPartlyVisibleLinesToolStripMenuItem,
+            this.fullyInvisibleLinesToolStripMenuItem,
+            this.fullyVisibleLinesToolStripMenuItem});
+            this.тестСазерлендаToolStripMenuItem.Name = "тестСазерлендаToolStripMenuItem";
+            this.тестСазерлендаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.тестСазерлендаToolStripMenuItem.Text = "Sutherland test";
+            // 
+            // partlyVisibleLinesToolStripMenuItem
+            // 
+            this.partlyVisibleLinesToolStripMenuItem.Name = "partlyVisibleLinesToolStripMenuItem";
+            this.partlyVisibleLinesToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.partlyVisibleLinesToolStripMenuItem.Text = "Random partly visible lines";
+            this.partlyVisibleLinesToolStripMenuItem.Click += new System.EventHandler(this.partlyVisibleLinesToolStripMenuItem_Click);
+            // 
+            // roundPartlyVisibleLinesToolStripMenuItem
+            // 
+            this.roundPartlyVisibleLinesToolStripMenuItem.Name = "roundPartlyVisibleLinesToolStripMenuItem";
+            this.roundPartlyVisibleLinesToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.roundPartlyVisibleLinesToolStripMenuItem.Text = "Round partly visible lines";
+            this.roundPartlyVisibleLinesToolStripMenuItem.Click += new System.EventHandler(this.roundPartlyVisibleLinesToolStripMenuItem_Click);
+            // 
+            // fullyInvisibleLinesToolStripMenuItem
+            // 
+            this.fullyInvisibleLinesToolStripMenuItem.Name = "fullyInvisibleLinesToolStripMenuItem";
+            this.fullyInvisibleLinesToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.fullyInvisibleLinesToolStripMenuItem.Text = "Fully invisible lines";
+            this.fullyInvisibleLinesToolStripMenuItem.Click += new System.EventHandler(this.fullyInvisibleLinesToolStripMenuItem_Click);
+            // 
+            // fullyVisibleLinesToolStripMenuItem
+            // 
+            this.fullyVisibleLinesToolStripMenuItem.Name = "fullyVisibleLinesToolStripMenuItem";
+            this.fullyVisibleLinesToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.fullyVisibleLinesToolStripMenuItem.Text = "Fully visible lines";
+            this.fullyVisibleLinesToolStripMenuItem.Click += new System.EventHandler(this.fullyVisibleLinesToolStripMenuItem_Click);
+            // 
+            // beckTestToolStripMenuItem
+            // 
+            this.beckTestToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.randomPartlyVisibleLinesToolStripMenuItem,
+            this.roundPartlyVisibleLinesToolStripMenuItem1,
+            this.fullyVisibleLinesToolStripMenuItem1,
+            this.fullyInvisibleLinesToolStripMenuItem1});
+            this.beckTestToolStripMenuItem.Name = "beckTestToolStripMenuItem";
+            this.beckTestToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beckTestToolStripMenuItem.Text = "Beck test";
             // 
             // toolStrip
             // 
@@ -71,9 +140,7 @@
             this.toolStripButtonRestrictiveBorder,
             this.toolStripButtonSutherland,
             this.toolStripButtonClippingWindow,
-            this.toolStripButtonBeckAlgorithm,
-            this.toolStripButtonTestSutherland,
-            this.toolStripButtonTextBeck});
+            this.toolStripButtonBeckAlgorithm});
             this.toolStrip.Location = new System.Drawing.Point(0, 24);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -122,26 +189,6 @@
             this.toolStripButtonBeckAlgorithm.Text = "toolStripButton1";
             this.toolStripButtonBeckAlgorithm.Click += new System.EventHandler(this.toolStripButtonBeckAlgorithm_Click_1);
             // 
-            // toolStripButtonTestSutherland
-            // 
-            this.toolStripButtonTestSutherland.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonTestSutherland.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonTestSutherland.Image")));
-            this.toolStripButtonTestSutherland.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonTestSutherland.Name = "toolStripButtonTestSutherland";
-            this.toolStripButtonTestSutherland.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButtonTestSutherland.Text = "toolStripButton1";
-            this.toolStripButtonTestSutherland.Click += new System.EventHandler(this.toolStripButtonTestSutherland_Click);
-            // 
-            // toolStripButtonTextBeck
-            // 
-            this.toolStripButtonTextBeck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonTextBeck.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonTextBeck.Image")));
-            this.toolStripButtonTextBeck.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonTextBeck.Name = "toolStripButtonTextBeck";
-            this.toolStripButtonTextBeck.Size = new System.Drawing.Size(36, 36);
-            this.toolStripButtonTextBeck.Text = "toolStripButton1";
-            this.toolStripButtonTextBeck.Click += new System.EventHandler(this.toolStripButtonTextBeck_Click);
-            // 
             // pictureBoxField
             // 
             this.pictureBoxField.BackColor = System.Drawing.Color.LightGray;
@@ -155,6 +202,34 @@
             this.pictureBoxField.Click += new System.EventHandler(this.pictureBoxField_Click);
             this.pictureBoxField.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxField_MouseDown);
             this.pictureBoxField.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBoxField_MouseUp);
+            // 
+            // randomPartlyVisibleLinesToolStripMenuItem
+            // 
+            this.randomPartlyVisibleLinesToolStripMenuItem.Name = "randomPartlyVisibleLinesToolStripMenuItem";
+            this.randomPartlyVisibleLinesToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.randomPartlyVisibleLinesToolStripMenuItem.Text = "Random partly visible lines";
+            this.randomPartlyVisibleLinesToolStripMenuItem.Click += new System.EventHandler(this.randomPartlyVisibleLinesToolStripMenuItem_Click);
+            // 
+            // roundPartlyVisibleLinesToolStripMenuItem1
+            // 
+            this.roundPartlyVisibleLinesToolStripMenuItem1.Name = "roundPartlyVisibleLinesToolStripMenuItem1";
+            this.roundPartlyVisibleLinesToolStripMenuItem1.Size = new System.Drawing.Size(215, 22);
+            this.roundPartlyVisibleLinesToolStripMenuItem1.Text = "Round partly visible lines";
+            this.roundPartlyVisibleLinesToolStripMenuItem1.Click += new System.EventHandler(this.roundPartlyVisibleLinesToolStripMenuItem1_Click);
+            // 
+            // fullyVisibleLinesToolStripMenuItem1
+            // 
+            this.fullyVisibleLinesToolStripMenuItem1.Name = "fullyVisibleLinesToolStripMenuItem1";
+            this.fullyVisibleLinesToolStripMenuItem1.Size = new System.Drawing.Size(215, 22);
+            this.fullyVisibleLinesToolStripMenuItem1.Text = "Fully visible lines";
+            this.fullyVisibleLinesToolStripMenuItem1.Click += new System.EventHandler(this.fullyVisibleLinesToolStripMenuItem1_Click);
+            // 
+            // fullyInvisibleLinesToolStripMenuItem1
+            // 
+            this.fullyInvisibleLinesToolStripMenuItem1.Name = "fullyInvisibleLinesToolStripMenuItem1";
+            this.fullyInvisibleLinesToolStripMenuItem1.Size = new System.Drawing.Size(215, 22);
+            this.fullyInvisibleLinesToolStripMenuItem1.Text = "Fully invisible lines";
+            this.fullyInvisibleLinesToolStripMenuItem1.Click += new System.EventHandler(this.fullyInvisibleLinesToolStripMenuItem1_Click);
             // 
             // MainForm
             // 
@@ -189,8 +264,17 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonSutherland;
         private System.Windows.Forms.ToolStripButton toolStripButtonClippingWindow;
         private System.Windows.Forms.ToolStripButton toolStripButtonBeckAlgorithm;
-        private System.Windows.Forms.ToolStripButton toolStripButtonTestSutherland;
-        private System.Windows.Forms.ToolStripButton toolStripButtonTextBeck;
+        private System.Windows.Forms.ToolStripMenuItem тестыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem тестСазерлендаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem partlyVisibleLinesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem roundPartlyVisibleLinesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fullyInvisibleLinesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beckTestToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fullyVisibleLinesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem randomPartlyVisibleLinesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem roundPartlyVisibleLinesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem fullyVisibleLinesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem fullyInvisibleLinesToolStripMenuItem1;
     }
 }
 

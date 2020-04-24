@@ -22,8 +22,7 @@ namespace ApplicationForLineClipping_representation
         Pen inVisible;
         Pen bord;
 
-        const string testTimeFile = "..\\..\\..\\test_time.txt";
-        const string testTimeFileBeck = "..\\..\\..\\test_time_beck.txt";
+        const string testTimeFile = "..\\..\\..\\Tests_time.txt";
 
         private enum tools : byte { border, Sutherland, clippingWindow, beck };
         tools activeTool = new tools();
@@ -71,7 +70,7 @@ namespace ApplicationForLineClipping_representation
                         {
                             SectionPoint a = new SectionPoint(startPoint.X, startPoint.Y);
                             SectionPoint b = new SectionPoint(e.X, e.Y);
-                            Graph.DrawSection1(border, visible, inVisible, a, b);
+                            Graph.DrawSutherland(border, visible, inVisible, a, b);
                         }
                         break;
                     }
@@ -150,7 +149,6 @@ namespace ApplicationForLineClipping_representation
             toolStripButtonRestrictiveBorder.Checked = false;
             toolStripButtonBeckAlgorithm.Checked = false;
             toolStripButtonClippingWindow.Checked = false;
-            toolStripButtonTestSutherland.Checked = false;
         }
 
         private void ResetTool()
@@ -165,19 +163,23 @@ namespace ApplicationForLineClipping_representation
             Graph = pictureBoxField.CreateGraphics();
         }
 
-        private void toolStripButtonTestSutherland_Click(object sender, EventArgs e)
+        private void Test(bool isSutherland, bool isRandom,bool isFullVisible, bool isPartlyVisible, int iterationMulipier, int ITERATIONS)
         {
-            UncheckAllItems();
-            toolStripButtonTestSutherland.Checked = true;
-            testSutherland();
-        }
-
-        private void testSutherland()
-        {
-            const int SIZE = 100;
-            const int ITERATIONS = 5000;
+            const int SIZE = 400;
             Point center = new Point(pictureBoxField.Width / 2, pictureBoxField.Height / 2);
-            Rectangle clippingwindow = new Rectangle(center.X - pictureBoxField.Width/4, center.Y -pictureBoxField.Height/4, pictureBoxField.Width / 2, pictureBoxField.Height / 2);
+            Rectangle clippingwindow;
+            List<PointF> vertexes= new List<PointF>();
+            if (isRandom)
+                clippingwindow = new Rectangle(center.X - pictureBoxField.Width/4, center.Y -pictureBoxField.Height/4, pictureBoxField.Width / 2, pictureBoxField.Height / 2);
+            else
+                clippingwindow = new Rectangle(center.X - SIZE / 2, center.Y - SIZE / 2, SIZE, SIZE);
+            if (!isSutherland)
+            {
+                vertexes.Add(new PointF(clippingwindow.Left, clippingwindow.Top));
+                vertexes.Add(new PointF(clippingwindow.Left, clippingwindow.Bottom));
+                vertexes.Add(new PointF(clippingwindow.Right, clippingwindow.Bottom));
+                vertexes.Add(new PointF(clippingwindow.Right, clippingwindow.Top));
+            }
             Graph.DrawRectangle(bord, clippingwindow);
             SectionPoint A;
             SectionPoint B;
@@ -185,82 +187,114 @@ namespace ApplicationForLineClipping_representation
             var sw = new Stopwatch();
             Task.Run(() =>
             {
+                for (int k = 1; k <= iterationMulipier; k++)
+                {
                     StreamWriter output = new StreamWriter(testTimeFile, true);
+                    string s;
+                    if (isFullVisible)
+                        s = "Full visible";
+                    else if (isPartlyVisible)
+                        s = "Parly visible";
+                    else if (isRandom)
+                        s = "Random";
+                    else
+                        s = "Full invisible";
+                    output.WriteLine(((isSutherland) ? "Sutherland" : "Beck") + " test starts\n"+s);
+                    output.WriteLine("Iterations  Time");
                     long totalTime = 0;
                     for (int j = 0; j < 10; j++)
                     {
 
                         Graph.Clear(pictureBoxField.BackColor);
-                        sw.Start();
-                        for (int i=0;i<ITERATIONS;i++)
+                        Graph.DrawRectangle(Pens.Blue,clippingwindow);
+                        
+                        for (double i = 0; i < Math.PI; i+=Math.PI/(ITERATIONS*k))
                         {
-                        //A = new SectionPoint((int)(center.X+300 + SIZE/3 * Math.Cos(i)), (int)(center.Y + SIZE/3 * Math.Sin(i)));
-                        //B = new SectionPoint((int)(center.X+300 + SIZE/3 * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE/3 * Math.Sin(i + Math.PI)));
-                        //A = new SectionPoint(center.X+rand.Next() % 20, center.Y - 200- rand.Next() % 50);
-                        //B = new SectionPoint(center.X- rand.Next() % 20, center.Y + 200+ rand.Next() % 50);
-                        A = new SectionPoint(rand.Next() % pictureBoxField.Width, rand.Next() % pictureBoxField.Height);
-                        B = new SectionPoint(rand.Next() % pictureBoxField.Width, rand.Next()%pictureBoxField.Height);
-                        Graph.DrawSection1(clippingwindow, visible, inVisible, A, B);
+                            if(isRandom)
+                            {
+                                A = new SectionPoint(rand.Next() % pictureBoxField.Width, rand.Next() % pictureBoxField.Height);
+                                B = new SectionPoint(rand.Next() % pictureBoxField.Width, rand.Next() % pictureBoxField.Height);
+                            }
+                            else if(isPartlyVisible)
+                            {
+                                A = new SectionPoint((int)(center.X + SIZE * Math.Cos(i)), (int)(center.Y + SIZE * Math.Sin(i)));
+                                B = new SectionPoint((int)(center.X + SIZE * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE * Math.Sin(i + Math.PI)));
+                            }
+                            else if(isFullVisible)
+                            {
+                                A = new SectionPoint((int)(center.X + SIZE/3 * Math.Cos(i)), (int)(center.Y + SIZE/3 * Math.Sin(i)));
+                                B = new SectionPoint((int)(center.X + SIZE/3 * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE/3 * Math.Sin(i + Math.PI)));
+
+                            }
+                            else
+                            {
+                                A = new SectionPoint((int)(center.X+300 + SIZE/3 * Math.Cos(i)), (int)(center.Y + SIZE/3 * Math.Sin(i)));
+                                B = new SectionPoint((int)(center.X+300 + SIZE/3 * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE/3 * Math.Sin(i + Math.PI)));
+
+                            }
+                            if (isSutherland)
+                            {
+                                sw.Start();
+                                Graph.DrawSutherland(clippingwindow, visible, inVisible, A, B);
+                                sw.Stop();
+                            }
+                            else
+                            {
+                                var normales = Graph.DefineNormales(vertexes);
+                                sw.Start();
+                                Graph.DrawBeckWithoutNormalesDefinition(vertexes, normales, visible, inVisible, (PointF)A, (PointF)B);
+                                sw.Stop();
+                            }
+                            totalTime += sw.ElapsedMilliseconds;
+                            sw.Reset();
+
                         }
-                        sw.Stop();
-                        totalTime += sw.ElapsedMilliseconds;
                         sw.Reset();
                     }
-                    output.WriteLine($"{ITERATIONS}\t{totalTime/10}");
+                    output.WriteLine($"{ITERATIONS}\t{totalTime / 10}");
                     output.Close();
+                }
             });
         }
-
-        private void toolStripButtonTextBeck_Click(object sender, EventArgs e)
+        private void partlyVisibleLinesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Test(true,true, false, true, 1,1000);
+        }
 
-            const int SIZE = 300;
-            const int ITERATIONS = 5000;
-            Point center = new Point(pictureBoxField.Width / 2, pictureBoxField.Height / 2);
-            List<PointF> clippingwindow = new List<PointF>();
-            clippingwindow.Add(new PointF(center.X - pictureBoxField.Width / 4, center.Y - pictureBoxField.Height / 4));
-            clippingwindow.Add(new PointF(center.X - pictureBoxField.Width / 4, center.Y + pictureBoxField.Height / 4));
-            clippingwindow.Add(new PointF(center.X + pictureBoxField.Width / 4, center.Y + pictureBoxField.Height / 4));
-            clippingwindow.Add(new PointF(center.X + pictureBoxField.Width / 4, center.Y - pictureBoxField.Height / 4));
-            //clippingwindow.Add(new PointF(center.X - SIZE / 2, center.Y - SIZE / 2));
-            //clippingwindow.Add(new PointF(center.X - 40 - SIZE / 2, center.Y));
-            //clippingwindow.Add(new PointF(center.X - SIZE / 2, center.Y + SIZE / 2));
-            //clippingwindow.Add(new PointF(center.X + SIZE / 2, center.Y + SIZE / 2));
-            //clippingwindow.Add(new PointF(center.X + 40 + SIZE / 2, center.Y));
-            //clippingwindow.Add(new PointF(center.X + SIZE / 2, center.Y - SIZE / 2));
-            //clippingwindow.Add(new PointF(center.X, center.Y - 40 - SIZE / 2));
+        private void roundPartlyVisibleLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Test(true,false, false, true, 1,1000);
+        }
 
-            int[] sides = {3,4,5,7,8,9,10,12};
-            Random rand = new Random();
-            PointF A;
-            PointF B;
-            var sw = new Stopwatch();
-                //for (double j = 0; j < Math.PI * 2; j += Math.PI * 2 /sides[k])
-                //    clippingwindow.Add(new PointF((float)(center.X + SIZE/2 * Math.Cos(j)), (float)(center.Y + SIZE/2 * Math.Sin(j))));
-                var normales = Graph.DefineNormales(clippingwindow);
-                //Graph.DrawPolygon(Pens.Black, clippingwindow.ToArray());
-                    StreamWriter output = new StreamWriter(testTimeFileBeck, true);
-                    long totalTime = 0;
-            for (int j = 0; j < 10; j++)
-            {         
+        private void fullyInvisibleLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Test(true,false, false, false, 1,1000);
+        }
 
-                Graph.Clear(pictureBoxField.BackColor);
-                sw.Start();
-                for (double i = 0; i < Math.PI; i += Math.PI * 2 / ITERATIONS)
-                {
-                    A = new PointF(rand.Next() % pictureBoxField.Width, rand.Next() % pictureBoxField.Height);
-                    B = new PointF(rand.Next() % pictureBoxField.Width, rand.Next() % pictureBoxField.Height);
-                    //A = new Point((int)(center.X + SIZE * Math.Cos(i)), (int)(center.Y + SIZE * Math.Sin(i)));
-                    //B = new Point((int)(center.X + SIZE * Math.Cos(i + Math.PI)), (int)(center.Y + SIZE * Math.Sin(i + Math.PI)));
-                    Graph.DrawBeckWithoutNormalesDefinition(clippingwindow, normales, visible, inVisible, A, B);
+        private void fullyVisibleLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Test(true,false, true, false, 1, 1000);
+        }
 
-                }
-                sw.Stop();
-                totalTime += sw.ElapsedMilliseconds;
-                sw.Reset();
-            }
-                    output.WriteLine($"{clippingwindow.Count}\t{ITERATIONS}\t{totalTime / 10}");
-                    output.Close();
+        private void randomPartlyVisibleLinesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Test(false, true, false, true, 1, 1000);
+        }
+
+        private void roundPartlyVisibleLinesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Test(false, false, false, true, 2, 1000);
+        }
+
+        private void fullyVisibleLinesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Test(false, false, true, false, 1, 1000);
+
+        }
+
+        private void fullyInvisibleLinesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Test(false, false, false, false, 1, 1000);
         }
     }
 }

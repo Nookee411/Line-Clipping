@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.CodeDom;
 
 namespace ClassesForLineClipping
 {
@@ -43,5 +44,7 @@ namespace ClassesForLineClipping
             else if (y < Up) code += 8;
             return code;
         }
+
+        public static explicit operator PointF(SectionPoint a) => new PointF(a.X,a.Y);
     }
 }
